@@ -7,7 +7,7 @@ uniform float u_time;
 
 const float PI = acos(-1.0);
 
-float time = u_time;
+float time = u_time * 0.5;
 
 vec3 colorize(vec3 col, vec3 mod) {
     col.x *= mod.x;
@@ -22,11 +22,11 @@ void main() {
     vec3 col = vec3(0.0);
 
     float r = 0.3;
-    float l = 100.0;
+    float l = 1000.0;
     for (float i=0.0; i<l; i++) {
-        col += 0.001 / length(vec2(uv.x - r * sin(PI/l*i*2 + time), uv.y - r * tan(PI/l*i*2)));
+        col += 0.0001 / length(vec2(uv.x - r * tan(PI/l*i*5 + time) * cos(i) * sin(5), uv.y - r * tan(PI/l*i*2 + time)));
     }
 
-    fragColor = vec4(colorize(col, vec3(atan(time*2) + 0.1, 0, cos(-time*2) + 0.1)), 1.0);
+    fragColor = vec4(colorize(col, vec3(0.8,0.4,1.0)), 1.0);
 
 }
